@@ -1,9 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+import request from 'supertest';
 import { AppModule } from './../src/app.module';
-
-jest.setTimeout(30_000);
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;

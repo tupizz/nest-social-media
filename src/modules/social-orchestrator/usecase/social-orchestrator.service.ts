@@ -5,7 +5,6 @@ import { FacebookRequest } from '../../../common/api/facebook';
 import { InstagramRequest } from '../../../common/api/instagram';
 import { TwitterRequest } from '../../../common/api/twitter';
 import { SocialMediaRequest } from '../../../common/interfaces/social-media-request';
-import { retryPromise } from '../../../common/retryable-promise/retryable-call';
 
 @Injectable()
 export class SocialMediaOrchestratorService {
@@ -30,11 +29,7 @@ export class SocialMediaOrchestratorService {
   private async callOrGetFromCache(request: SocialMediaRequest<any>, cacheName: string) {
     let value = await this.cacheManager.get(cacheName);
     if (!value) {
-      value = await retryPromise<any>({
-        promise: request.feed(),
-        args: [request.URL],
-        retries: 4,
-      });
+      value = await request.feed();
       await this.cacheManager.set(cacheName, value, { ttl: 30 });
     }
     return value;

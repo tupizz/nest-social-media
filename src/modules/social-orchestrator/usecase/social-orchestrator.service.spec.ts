@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SocialOrchestratorService } from './social-orchestrator.service';
+import { SocialMediaOrchestratorService } from './social-orchestrator.service';
 
 describe('SocialOrchestratorService', () => {
-  let service: SocialOrchestratorService;
+  let service: SocialMediaOrchestratorService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [SocialOrchestratorService],
+      providers: [SocialMediaOrchestratorService],
     }).compile();
 
-    service = module.get<SocialOrchestratorService>(SocialOrchestratorService);
+    service = module.get<SocialMediaOrchestratorService>(SocialMediaOrchestratorService);
   });
 
   it('should be defined', () => {

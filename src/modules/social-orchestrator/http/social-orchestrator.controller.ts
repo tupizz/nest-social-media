@@ -1,11 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import { SocialOrchestratorService } from '../usecase/social-orchestrator.service';
+import { SocialMediaOrchestratorService } from '../usecase/social-orchestrator.service';
 
 @Controller()
 export class SocialOrchestratorController {
-  constructor(
-    private readonly socialOrchestratorService: SocialOrchestratorService,
-  ) {}
+  constructor(private readonly socialOrchestratorService: SocialMediaOrchestratorService) {}
 
   @Get()
   findAll() {

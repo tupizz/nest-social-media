@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { codeFightApi } from '../helpers/axios';
 
 export interface RetryPromiseArgs<T> {
   promise: Promise<T>;
@@ -6,7 +6,6 @@ export interface RetryPromiseArgs<T> {
   timeout?: number;
   args: string[];
 }
-
 const sleep = (time: number) => new Promise((r) => setTimeout(r, time, []));
 
 export async function retryPromise<T>({ promise, retries, timeout, args }: RetryPromiseArgs<T>): Promise<T> {
@@ -26,10 +25,10 @@ export async function retryPromise<T>({ promise, retries, timeout, args }: Retry
       throw new Error(error);
     }
 
-    await sleep(500);
+    await sleep(1000);
 
     return retryPromise({
-      promise: axios.get(`http://codefight.davidbanham.com/${args[0]}`).then((result) => result.data),
+      promise: codeFightApi.get(args[0]).then((result) => result.data),
       args,
       retries: --retries,
       timeout,

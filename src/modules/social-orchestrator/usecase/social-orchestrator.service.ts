@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
-import { FacebookRequest } from 'src/common/api/facebook';
-import { InstagramRequest } from 'src/common/api/instagram';
-import { TwitterRequest } from 'src/common/api/twitter';
-import { SocialMediaRequest } from 'src/common/interfaces/social-media-request';
-import { retryPromise } from 'src/common/retryable-promise';
+import { FacebookRequest } from '../../../common/api/facebook';
+import { InstagramRequest } from '../../../common/api/instagram';
+import { TwitterRequest } from '../../../common/api/twitter';
+import { SocialMediaRequest } from '../../../common/interfaces/social-media-request';
+import { retryPromise } from '../../../common/retryable-promise/retryable-call';
 
 @Injectable()
 export class SocialMediaOrchestratorService {
@@ -34,7 +34,6 @@ export class SocialMediaOrchestratorService {
         promise: request.feed(),
         args: [request.URL],
         retries: 4,
-        timeout: 3000,
       });
       await this.cacheManager.set(cacheName, value, { ttl: 30 });
     }

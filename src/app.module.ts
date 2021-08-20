@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { SocialOrchestratorModule } from './modules/social-orchestrator/social-orchestrator.module';
 
 @Module({
-  imports: [],
+  imports: [SocialOrchestratorModule],
   controllers: [],
   providers: [],
 })

@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { HttpClient } from '../helpers/http-client';
 import { SocialMediaRequest } from '../interfaces/social-media-request';
 
@@ -13,7 +13,7 @@ export class TwitterRequest implements SocialMediaRequest<TwitterData> {
 
   public URL = '/twitter';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(@Inject('HttpClient') private httpClient: HttpClient) {}
 
   async feed() {
     const result = await this.httpClient.create().get<TwitterData>(this.URL);

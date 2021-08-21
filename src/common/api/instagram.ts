@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { HttpClient } from '../helpers/http-client';
 import { SocialMediaRequest } from '../interfaces/social-media-request';
 
@@ -13,7 +13,7 @@ export class InstagramRequest implements SocialMediaRequest<InstagramData> {
 
   public URL = '/instagram';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(@Inject('HttpClient') private httpClient: HttpClient) {}
 
   async feed() {
     const result = await this.httpClient.create().get<InstagramData>(this.URL);

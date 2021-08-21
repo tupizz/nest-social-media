@@ -19,8 +19,13 @@ const TwitterRequestService = {
   useClass: TwitterRequest,
 };
 
+const HttpClientProvider = {
+  provide: 'HttpClient',
+  useClass: HttpClient,
+};
+
 @Module({
-  providers: [FacebookRequestService, InstagramRequestService, TwitterRequestService, HttpClient],
+  providers: [FacebookRequestService, InstagramRequestService, TwitterRequestService, HttpClientProvider],
   exports: [FacebookRequestService, InstagramRequestService, TwitterRequestService],
 })
 export class CommonModule {}

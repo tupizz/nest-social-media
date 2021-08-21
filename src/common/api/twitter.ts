@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { codeFightApi } from '../helpers/axios';
+import { HttpClient } from '../helpers/http-client';
 import { SocialMediaRequest } from '../interfaces/social-media-request';
 
 export type TwitterData = {
@@ -13,8 +13,10 @@ export class TwitterRequest implements SocialMediaRequest<TwitterData> {
 
   public URL = '/twitter';
 
+  constructor(private httpClient: HttpClient) {}
+
   async feed() {
-    const result = await codeFightApi.get<TwitterData>(this.URL);
+    const result = await this.httpClient.create().get<TwitterData>(this.URL);
     this.logger.log(JSON.stringify(result.data));
     return result.data;
   }

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { FacebookRequest } from './api/facebook';
 import { InstagramRequest } from './api/instagram';
 import { TwitterRequest } from './api/twitter';
+import { HttpClient } from './helpers/http-client';
 
 const FacebookRequestService = {
   provide: 'FacebookRequest',
@@ -19,7 +20,7 @@ const TwitterRequestService = {
 };
 
 @Module({
-  providers: [FacebookRequestService, InstagramRequestService, TwitterRequestService],
+  providers: [FacebookRequestService, InstagramRequestService, TwitterRequestService, HttpClient],
   exports: [FacebookRequestService, InstagramRequestService, TwitterRequestService],
 })
 export class CommonModule {}

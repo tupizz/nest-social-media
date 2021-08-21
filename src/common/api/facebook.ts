@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { codeFightApi } from '../helpers/axios';
+import { HttpClient } from '../helpers/http-client';
 import { SocialMediaRequest } from '../interfaces/social-media-request';
 
 export type FacebookData = {
@@ -13,8 +13,10 @@ export class FacebookRequest implements SocialMediaRequest<FacebookData> {
 
   public URL = '/facebook';
 
+  constructor(private httpClient: HttpClient) {}
+
   async feed() {
-    const result = await codeFightApi.get<FacebookData>(this.URL);
+    const result = await this.httpClient.create().get<FacebookData>(this.URL);
     this.logger.log(JSON.stringify(result.data));
     return result.data;
   }

@@ -12,7 +12,7 @@ class MockHttpClient implements ClientFactory<any> {
           data: [
             {
               username: 'tupizz',
-              tweet: 'hello world',
+              picture: 'pic',
             },
           ],
         };
@@ -42,7 +42,7 @@ describe('InstagramRequest', () => {
       expect(await service.feed()).toStrictEqual([
         {
           username: 'tupizz',
-          tweet: 'hello world',
+          picture: 'pic',
         },
       ]);
     });

@@ -11,8 +11,8 @@ class MockHttpClient implements ClientFactory<any> {
         return {
           data: [
             {
-              username: 'tupizz',
-              tweet: 'hello world',
+              name: 'tupizz',
+              status: 'happy',
             },
           ],
         };
@@ -41,8 +41,8 @@ describe('FacebookRequest', () => {
     test('should return all the medias correctly', async () => {
       expect(await service.feed()).toStrictEqual([
         {
-          username: 'tupizz',
-          tweet: 'hello world',
+          name: 'tupizz',
+          status: 'happy',
         },
       ]);
     });

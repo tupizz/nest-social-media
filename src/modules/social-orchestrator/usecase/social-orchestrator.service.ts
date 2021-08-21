@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
 import { FacebookRequest } from '../../../common/api/facebook';
@@ -8,6 +8,8 @@ import { SocialMediaRequest } from '../../../common/interfaces/social-media-requ
 
 @Injectable()
 export class SocialMediaOrchestratorService {
+  private readonly logger = new Logger(SocialMediaOrchestratorService.name);
+
   constructor(
     @Inject('FacebookRequest')
     private facebookRequest: FacebookRequest,
@@ -20,6 +22,7 @@ export class SocialMediaOrchestratorService {
   ) {}
 
   async findAll() {
+    this.logger.log('Getting feeds from: facebook, instagram and twitter');
     const facebook = await this.callOrGetFromCache(this.facebookRequest, 'facebook@feed');
     const instagram = await this.callOrGetFromCache(this.instagramRequest, 'instagram@feed');
     const twitter = await this.callOrGetFromCache(this.twitterRequest, 'twitter@feed');
